@@ -61,16 +61,7 @@ g=[0;-g0;0];
 % w = sym(zeros(3, dim));
 % T = sym(zeros(3,dim));
 
-
-for i = 1:dim
-    vc(:,i) = jacobian(pc(:,i), q)*q_dot;
-    w(:,i) = jacobian(theta(:,i), q)*q_dot;
-    T(i) = 1/2*m(i)*sqr_norm(vc(:,i))+ 1/2*I(i)*sqr_norm(w(:,i));
-end
-
-T = sum(T);
-
-T = collect(simplify(T),q_dot);
+T = compute_kin_en_from_pc(pc, theta, q, q_dot, m, I);
 
 B = compute_B(T,q_dot);
 
@@ -78,10 +69,7 @@ B = compute_B(T,q_dot);
 
 %% calcola U e g
 
-for i = 1:length(m)
-    U(i) = -m(i)*g'*pc(:,i);
-end
+[U, G] = compute_pot_energy_and_G(pc,q,g,m,k);
 
-U=collect(simplify(sum(U)),q)
-
-G=collect(jacobian(U,q)',[g0 k])
+disp('U ='); disp(U);
+disp('G ='); disp(G);
