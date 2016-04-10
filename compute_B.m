@@ -29,7 +29,7 @@ for l = 1:clen
     end
 end
 
-B = simplify(B)
+B = simplify(B);
 
 end
 

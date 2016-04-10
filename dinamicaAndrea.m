@@ -57,10 +57,6 @@ g=[0;-g0;0];
 
 %%
 
-% vc = sym(zeros(3,dim));
-% w = sym(zeros(3, dim));
-% T = sym(zeros(3,dim));
-
 T = compute_kin_en_from_pc(pc, theta, q, q_dot, m, I);
 
 B = compute_B(T,q_dot);
