@@ -23,8 +23,10 @@ r = A(1:3,4,:);
 n = length(theta);
 
 [T_tot, w, v, vc] = compute_kin_energy(R, r, rc, m, I, q_dot, type, n);
+disp('T= '); disp(T_tot);
 
 B = compute_B(T_tot, q_dot);
+disp('B= '); disp(B);
 
 [c, ~] = compute_cent_coriol_terms(B, q, q_dot);
 

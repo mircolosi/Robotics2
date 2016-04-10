@@ -1,16 +1,16 @@
 clc; clear all; close all;
 
-syms q1 q2 q1_dot q2_dot g0 m1 m2 I1 I2 k real
+syms q1 q2 q1_dot q2_dot d1 l1 g0 m1 m2 I1 I2 k real
 
-pc1 = [0, 0, 0]';
-pc2 = [q2*cos(q1), q2*sin(q1), 0]';
+pc1 = [d1*cos(q1), d1*sin(q1), 0]';
+pc2 = [l1*cos(q1)-q2*sin(q1), l1*sin(q1)+q2*cos(q1), 0]';
 pc = [pc1 pc2];
 
 theta1 = [0 0 q1]';
 theta2 = [0 0 q1]';
 theta = [theta1 theta2];
 
-g = [0 -g0 0]';
+g_vect = [g0 0 0]';
 
 q = [q1 q2]';
 q_dot = [q1_dot q2_dot]';
@@ -29,7 +29,7 @@ disp('c= '); disp(c);
 
 %% calcola U e g
 
-[U, G] = compute_pot_energy_and_G(pc,q,g,m,k);
+[U, g] = compute_pot_energy_and_G(pc,q,g_vect,m,k);
 
 disp('U ='); disp(U);
-disp('G ='); disp(G);
+disp('g ='); disp(g);
