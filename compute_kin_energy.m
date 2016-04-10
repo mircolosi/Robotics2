@@ -5,7 +5,7 @@ function [ T_tot, w, v, vc ] = compute_kin_energy( R, r, rc, m, I, q_dot, type, 
 w(:,1) = sym('[0,0,0]')';
 v(:,1) = sym('[0,0,0]')';
 vc(:,1) = sym('[0,0,0]')';
-
+Identity = eye(3);
 for i=2:n+1
     
     if strcmp(type(i-1), 'r')
@@ -20,7 +20,7 @@ for i=2:n+1
     v(:,i) = simplify(v(:,i));
     vc(:,i) = v(:,i) + cross(w(:,i), rc(:,i-1));
     vc(:,i) = simplify(vc(:,i));
-    T(i-1) = 1/2*m(i-1)*sqr_norm(vc(:,i))+1/2*I(i-1)*sqr_norm(w(:,i));
+    T(i-1) = 1/2*m(i-1)*sqr_norm(vc(:,i),Identity)+1/2*sqr_norm(w(:,i),I(i-1));
     T(i-1) = simplify(T(i-1));
 end
 
